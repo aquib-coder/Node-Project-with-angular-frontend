@@ -1,0 +1,97 @@
+
+<div class="container" >
+  <h2>Add Record</h2><form (submit)=addContact()>
+  First Name:<input type="text" [(ngModel)]="first_name" name="first_name" class="form-control">
+  Last Name:<input type="text" [(ngModel)]="last_name" name="last_name" class="form-control">
+  Contact No:<input type="text" [(ngModel)]="phone" name="phone" class="form-control">
+  Salary:<input type="text" [(ngModel)]="salary" name="salary" class="form-control">
+  Date of Joining:<input type="date" [(ngModel)]="doj" name="doj" class="form-control">
+  <button type="submit">Submit details</button>
+</form>
+<hr>
+<div class="loader_wrap  " *ngIf="loader">
+  <br/><br/>
+  <h3 class="h3"></h3>
+  <div class="row">
+      <div class="col-md-12">
+          <div class="preloader2 load p" >
+              <div class="box1"></div>
+              <div class="box2"></div>
+              <div class="box3"></div>
+              <div class="box4"></div>
+          </div>
+      </div>
+  </div>
+  <br/><br/>
+</div>
+<input type="text" [(ngModel)]="searchName"><button (click)="searchNameFunc()">Search Name</button>
+Enter range of salary:
+<input type="text" [(ngModel)]="ss" placeholder="Start salary">
+<input type="text" [(ngModel)]="es" placeholder="End salary">
+<button (click)="searchSalaryWise()">Search</button>
+
+<h2>Contact Details</h2>
+<table border=1 class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Phone No</th>
+      <th>Salary</th>
+      <th>Date of Joining</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let c of can">
+      <td>{{c.first_name}}</td>
+      <td>{{c.last_name}}</td>
+      <td>{{c.phone}}</td>
+      <td>{{c.salary}}</td>
+      <td>{{c.doj|date:'dd-MMM-yyyy'}}</td>
+      <td><input type="button" class="btn btn-success" value="Edit" (click)="editContact(c)"></td>
+      <td><input type="button" class="btn btn-danger" value="Delete" (click)="deleteContact(c._id)"></td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+<div class="backdrop" [ngStyle]="{'display':display}"></div>
+
+<!-- modal -->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+    <!-- modal-dialog -->
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <!-- modal-content -->
+        <div class="modal-content">
+            <!-- modal-header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Export File</h4>
+                <button type="button" class="close" aria-label="Close" (click)="closeModalDialog()"><span aria-hidden="true">&times;</span></button>
+                <!-- <h4 class="modal-title">Login</h4> -->
+            </div>
+
+            <!-- modal-body -->
+            <div class="modal-body">
+                <div class="d-flex justify-content-between mb-3">
+                    <p class="mb-0">
+                      First Name:<input type="text" [(ngModel)]="first_name1" name="first_name1" class="form-control"><br>
+                      Last Name:<input type="text" [(ngModel)]="last_name1" name="last_name1"  class="form-control"><br>
+                      Contact No:<input type="text" [(ngModel)]="phone1" name="phone1"  class="form-control">
+                    </p>
+                </div>              
+            </div>
+
+            <!-- modal-footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" (click)="saveDtls()">Save</button>
+                <button type="button" class="btn btn-default" (click)="closeModalDialog()">Close</button>
+                
+            </div>
+        </div>
+    </div>
+</div>
+</div> 
